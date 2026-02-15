@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carta Especial Para Luis</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: rgb(253, 220, 220); 
+      overflow-x: hidden;
+    }
+    .screen {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      flex-direction: column;
+    }
+    .active {
+      display: flex;
+    }
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 60px);
+      gap: 10px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+    .key {
+      background-color: white;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      font-size: 20px;
+      padding: 15px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 4px 4px 8px rgba(0,0,0,0.1);
+    }
+    .key:hover {
+      background-color: #9e6262bd;
+      transform: translateY(-3px);
+    }
+    .input-display {
+      font-size: 24px;
+      margin-top: 20px;
+      letter-spacing: 8px;
+    }
+    .notepad {
+      background-color: #c99879;
+      border: 3px solid #000000;
+      padding: 20px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 500px;
+      text-align: left;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      line-height: 1.6;
+      box-shadow: 8px 8px 15px rgba(0,0,0,0.2);
+      position: relative;
+    }
+    .notepad h3 {
+      margin-top: 0;
+    }
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+    .btn {
+      background-color: rgb(255, 230, 201);
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 4px 4px 8px rgba(0,0,0,0.15);
+      transition: all 0.2s ease;
+    }
+    .btn:hover {
+      background-color: #e99494;
+      transform: translateY(-2px);
+    }
+    .img-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    .img-page img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 15px;
+      box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Pantalla de contraseña -->
+<div id="passwordScreen" class="screen active">
+  <h2>🔒 Ingresa la contraseña</h2>
+  <div class="input-display" id="inputDisplay">••••</div>
+  <div class="keypad">
+    <button class="key" onclick="enterDigit('1')">1</button>
+    <button class="key" onclick="enterDigit('2')">2</button>
+    <button class="key" onclick="enterDigit('3')">3</button>
+    <button class="key" onclick="enterDigit('4')">4</button>
+    <button class="key" onclick="enterDigit('5')">5</button>
+    <button class="key" onclick="enterDigit('6')">6</button>
+    <button class="key" onclick="enterDigit('7')">7</button>
+    <button class="key" onclick="enterDigit('8')">8</button>
+    <button class="key" onclick="enterDigit('9')">9</button>
+    <button class="key" onclick="checkPassword()">✔</button>
+    <button class="key" onclick="enterDigit('0')">0</button>
+    <button class="key" onclick="deleteLast()">⌫</button>
+  </div>
+</div>
+
+<div id="notepadScreen" class="screen">
+
+  <div class="notepad" id="page1">
+    <h3>📅 14 Febrero de 2026</h3>
+    <h4>💌 Mi Querido Luisito</h4>
+    <p>Hoy quiero escribirte algo que nace completamente de mi corazón. Gracias…</p>
+    <p>gracias por estar conmigo, por elegirme cada día y por no soltar mi mano incluso en mis momentos más difíciles.
+      No sabes cuánto significa para mí saber que cuento contigo, que cuando todo se siente pesado, tú eres mi calma y mi fuerza.</p>
+    <p>Gracias por escucharme, por entenderme, por abrazarme cuando lo necesito y por quedarte cuando tal vez no era fácil. Tu amor ha sido mi refugio, 
+      mi lugar seguro, mi paz. Has estado a mi lado en mis días grises y también celebrando mis días felices, y eso no lo hace cualquiera.</p>
+<p>Quiero que sepas que te amo con todo mi corazón. Te amo por quien eres, por tu forma de quererme, por tu paciencia, por tu apoyo incondicional. Eres una parte tan importante de mi vida que ya no imagino mis días sin ti. Eres mi compañero, mi apoyo, mi persona favorita</p>
+<p>Gracias por tanto amor, por tanta entrega y por hacerme sentir tan especial. Prometo seguir caminando contigo, cuidándote, apoyándote y amándote cada día más.</p>
+<p>Con todo mi corazón,</p>
+<p>Kika</p>
+    <div class="btn-container">
+      <button class="btn" onclick="goBack()">⬅ Inicio</button>
+      <button class="btn" onclick="nextPage(2)">➡ Siguiente</button>
+    </div>
+  </div>
+
+  <div class="notepad" id="page2" style="display:none; text-align:center;">
+    <img src="https://drive.google.com/file/d/10UGHr1bvTQF1KvaS03OebX0AOPfbMzDm/view?usp=drive_link" alt="Foto especial" style="width:90%; max-width:350px; border-radius:15px; box-shadow:4px 4px 10px rgba(0,0,0,0.2); margin-bottom:15px;">
+    <p style="text-align:justify;">
+      Desde que llegaste a mi vida, todo cambió para bien; encontré en ti la paz que siempre busqué y la alegría que creí perdida. Me haces sentir completa, un poco amada y capaz de todo. Cada mirada tuya me recuerda por qué vale la pena cada día, y cada palabra tuya me da fuerzas para seguir. No necesito prometerte el mundo, solo quiero darte mi amor sincero, mi apoyo incondicional y mi deseo de compartir contigo cada instante de esta vida.
+    </p>
+    <div class="btn-container">
+      <button class="btn" onclick="prevPage(1)">⬅ Anterior</button>
+      <button class="btn" onclick="nextPage(3)">➡ Siguiente</button>
+    </div>
+  </div>
+
+<div class="notepad" id="page3" style="display:none; text-align:center;">
+  <h4>📸 Nuestros recuerdos</h4>
+  <div class="carousel">
+    <div class="carousel-track" id="carouselTrack">
+      <img src="img/2.jpeg" alt="Recuerdo 1">
+      <img src="img/3.jpeg" alt="Recuerdo 2">
+      <img src="img/4.jpeg" alt="Recuerdo 3">
+      <img src="img/5.jpeg" alt="Recuerdo 4">
+    </div>
+    <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+  </div>
+  <div class="btn-container">
+    <button class="btn" onclick="prevPage(2)">⬅ Anterior</button>
+    <button class="btn" onclick="goBack()">⬅ Inicio</button>
+  </div>
+</div>
+
+<style>
+.carousel {
+  position: relative;
+  width: 90%;
+  max-width: 500px;
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+  width: 100%;
+}
+
+.carousel-track img {
+  width: 100%;
+  border-radius: 15px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 50%;
+}
+
+.carousel-btn:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.carousel-btn.prev { left: 10px; }
+.carousel-btn.next { right: 10px; }
+</style>
+
+<script>
+let currentSlide = 0;
+
+function moveSlide(direction) {
+  const track = document.getElementById('carouselTrack');
+  const slides = track.children.length;
+  currentSlide += direction;
+
+  if (currentSlide < 0) currentSlide = slides - 1;
+  if (currentSlide >= slides) currentSlide = 0;
+
+  track.style.transform = `translateX(-${currentSlide * 100}%)`;
+}
+</script>
+
+</div>
+
+<script>
+  const correctPassword = '1019';
+  let input = '';
+
+  function enterDigit(digit) {
+    if (input.length < 4) {
+      input += digit;
+      updateDisplay();
+    }
+  }
+  function deleteLast() {
+    input = input.slice(0, -1);
+    updateDisplay();
+  }
+  function updateDisplay() {
+    document.getElementById('inputDisplay').textContent = input.padEnd(4, '•');
+  }
+  function checkPassword() {
+    if (input.length === 4) {
+      if (input === correctPassword) {
+        document.getElementById('passwordScreen').classList.remove('active');
+        document.getElementById('notepadScreen').classList.add('active');
+        showPage(1);
+      } else {
+        alert('Contraseña incorrecta, intenta de nuevo');
+        input = '';
+        updateDisplay();
+      }
+    } else {
+      alert('Debes ingresar los 4 dígitos.');
+    }
+  }
+  function goBack() {
+    document.getElementById('notepadScreen').classList.remove('active');
+    document.getElementById('passwordScreen').classList.add('active');
+    input = '';
+    updateDisplay();
+  }
+
+  // Control de páginas
+  function showPage(n) {
+    const pages = document.querySelectorAll('.notepad');
+    pages.forEach(p => p.style.display = 'none');
+    document.getElementById('page' + n).style.display = 'block';
+  }
+  function nextPage(n) {
+    showPage(n);
+  }
+  function prevPage(n) {
+    showPage(n);
+  }
+</script>
+</body>
+</html>
